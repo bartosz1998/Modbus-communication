@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<style>
+body{
+	 background-color: rgb(30 41 59);;
+}
+
+.panel{
+      width: 100%;
+      height:10%;
+}
+
+.panel h2 {
+  font-family: 'Georgia', serif;
+  font-size: 25px;
+  text-align: center;
+  background: #CFE7fA;
+  background: linear-gradient(to right, #CFE7fA 66%, #4F4F4F 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+    
+}
+
+.container{
+  display: flex;
+  flex-direction: row;
+
+}
+
+.indoor{
+  width: 50%;
+  height:100%;
+  height:auto;
+ 
+}
+
+.indoor_text{
+  color: #c53a2d;
+  text-align: center;
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+.indoor_temp{
+  width:80%;
+  height:35%;
+  text-align: center;
+  background-color:#161616;
+  border-radius: 7px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto ;
+}
+
+.indoot_temp_text{
+  color:white;
+  padding-top:12px;
+  padding-bottom:5px;
+  border-bottom:1px outset #dddd0b;
+  margin-top:10px;
+  letter-spacing: 1px;
+}
+
+.indoot_temp_value{
+  color:white;
+  font-size: 40px;
+  font-weight: 600;
+  margin-top:20px;
+}
+
+.outdoor{
+  width: 50%;
+  height:auto;
+}
+
+.outdoor_text{
+  color: #c53a2d;
+  text-align: center;
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+#event {
+  margin-top:20px;
+  width:80%;
+  height:35%;
+  text-align: center;
+  border-radius: 7px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto ;
+  background-color:#12593d;
+}
+
+#event_two {
+  margin-top:20px;
+  width:80%;
+  height:35%;
+  text-align: center;
+  border-radius: 7px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto ;
+  background-color:#12593d;
+}
+
+#event_three{
+  margin-top:20px;
+  width:80%;
+  height:35%;
+  text-align: center;
+  border-radius: 7px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto ;
+  background-color:#12593d;
+}
+
+#event_four{
+  margin-top:20px;
+  width:80%;
+  height:35%;
+  text-align: center;
+  border-radius: 7px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto ;
+  background-color:#12593d;
+}
+
+.indoot_led_text{
+  color:white;
+  padding-top:12px;
+  padding-bottom:5px;
+  border-bottom:2px outset #dddd0b;
+  margin-top:10px;
+  letter-spacing: 1px;
+  background-color:#161616;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+
+}
+
+.indoot_led_value{
+	color:white;
+  font-size: 40px;
+  font-weight: 600;
+  margin-top:20px;
+}
+
+</style>
+<body>
+
+<div class="panel"><h2>CENTER SYSTEM</h2></div>
+<div class="container">
+<div class="indoor">
+	<div class="indoor_text">SYSTEM ROOM</div>
+    <div class="indoor_temp" id="indoorTemp">
+    	<div class="indoot_temp_text">INDOOR TEMPERAUTRE</div>
+        <div class="indoot_temp_value" id="indoot_temp_value2">20</div>
+    </div>
+    <div class="indoor_led" id="event">
+    	<div class="indoot_led_text">INDOOR LED1</div>
+        <div class="indoot_led_value" id="event_1">ON LED</div>
+    </div>
+    <div class="indoor_led" id="event_two">
+    	<div class="indoot_led_text">INDOOR LED2</div>
+        <div class="indoot_led_value" id="event_2">ON LED</div>
+    </div>
+</div>
+<div class="outdoor">
+	<div class="outdoor_text">SYSTEM OUTDOOR</div>
+    <div class="indoor_temp">
+    	<div class="indoot_temp_text">INDOOR TEMPERATURE</div>
+        <div class="indoot_temp_value" id="indoot_temp_value3">20</div>
+    </div>
+    <div class="indoor_led" id="event_three">
+    	<div class="indoot_led_text">INDOOR LED1</div>
+        <div class="indoot_led_value" id="event_3">ON LED</div>
+    </div>
+    <div class="indoor_led" id="event_four">
+    	<div class="indoot_led_text">INDOOR LED2</div>
+        <div class="indoot_led_value" id="event_4">ON LED</div>
+    </div>
+</div>
+</div>
+<script>
+
+function loadDoc(variable, variable_click){
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("GET",variable,true);
+  xhttp.send();
+  xhttp.onload = function(){
+    document.getElementById(variable_click).innerHTML = this.responseText;
+  }
+}
+
+function myevent2(v1,w1,x1){
+  const xhttp2 = new XMLHttpRequest();
+  xhttp2.open("GET",v1,true);
+  xhttp2.send();
+  xhttp2.onload = function(){
+    var lon = this.responseText;
+    console.log(lon);
+    if(lon == "off"){
+      document.getElementById(w1).innerHTML = "OFF LED";
+      document.getElementById(x1).style.backgroundColor = "#b22323";
+    }else{
+      document.getElementById(w1).innerHTML = "ON LED";
+      document.getElementById(x1).style.backgroundColor = "#12593d";
+    }
+  }
+}
+
+
+document.getElementById("event_1").addEventListener("click",function(){
+  myevent2("/event1","event_1","event")
+});
+
+document.getElementById("event_2").addEventListener("click",function(){
+  myevent2("/event2","event_2","event_two")
+});
+
+document.getElementById("event_3").addEventListener("click",function(){
+  myevent2("/event3","event_3","event_three")
+});
+
+document.getElementById("event_4").addEventListener("click",function(){
+  myevent2("/event4","event_4","event_four")
+});
+
+
+function event(status,o1,c1){
+      if(status == "off"){
+        document.getElementById(o1).innerHTML = "OFF LED";
+        document.getElementById(c1).style.backgroundColor = "#b22323";
+      }else if(status == "on"){
+        document.getElementById(o1).innerHTML = "ON LED";
+        document.getElementById(c1).style.backgroundColor = "#12593d";
+      }
+    }
+
+function event_value(){
+  const xhttp2 = new XMLHttpRequest();
+  xhttp2.open("GET","/event_value",true);
+  xhttp2.send();
+  xhttp2.onload = function(){
+    var lon = this.responseText;
+    console.log(lon);
+    console.log(lon[1]);
+    
+    if(lon[0] == "0"){
+      event("off","event_1","event");
+    }else if(lon[0] == "1"){
+      event("on","event_1","event");}
+    if(lon[1] == "0"){
+      event("off","event_2","event_two");
+    }else if(lon[1] == "1"){
+      event("on","event_2","event_two");}
+    if(lon[2] == "0"){
+      event("off","event_3","event_three");
+    }else if(lon[2] == "1"){
+      event("on","event_3","event_three");}
+    if(lon[3] == "0"){
+      event("off","event_4","event_four");
+    }else if(lon[3] == "1"){
+      event("on","event_4","event_four");
+    }
+}}
+
+setInterval(()=>{
+  loadDoc("/indoot_temp_value","indoot_temp_value2");
+  loadDoc("/outdoot_temp_value","indoot_temp_value3");
+  event_value();
+},1000);
+
+</script>
+</body>
+</html>
