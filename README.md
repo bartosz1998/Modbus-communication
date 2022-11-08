@@ -24,7 +24,7 @@ idf.py monitor
 
 # Technologies 💡
 
-+ c
++ C
 + ESP - IDF 
 + MODBUS
 + HTML
